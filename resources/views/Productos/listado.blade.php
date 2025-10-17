@@ -13,7 +13,14 @@
 </head>
 <body>
 
+<div class="container">
+
+
     <h1> Listado de Productos </h1>
+
+     <div align="right">
+            <a class="btn btn-success" href="{{route('form_reg_producto')}}"> Adicionar </a>
+    </div>
 
     <table class="table">
         <thead>
@@ -43,6 +50,8 @@
             @endforeach
         </tbody>
     </table>
+
+</div>
 
 </body>
 </html>

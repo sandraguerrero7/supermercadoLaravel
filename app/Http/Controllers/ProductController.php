@@ -45,25 +45,34 @@ class ProductController extends Controller
         /*
         Esta función sera invocada cuando el usuario le de clic en Editar
         */
-        $category = CategoriaModel::findOrFail($id); // Retorna el registro cuyo id corresponda
-        return view('Categorias.form_edicion', compact('category'));
+        $product= ProductoModel::findOrFail($id); // Retorna el registro cuyo id corresponda
+        $categorias = CategoriaModel::all();
+        return view('Productos.form_edicion', compact('product', 'categorias'));
     }
 
     public function actualizar(Request $r, $id){
-        $category = CategoriaModel::findOrFail($id);
-        $category->nombreCategoria = $r->input('nombre_categoria');
-        $category->descripcion = $r->input('descripcion_categoria');
-        $category->save();
-        return redirect()->route('categorias');
+        $product = ProductoModel::findOrFail($id);
+        $r->validate([
+            'nombre_producto' => 'required|string',
+            'cantidad_producto' => 'required|integer|min:1',
+            'precio_producto' => 'required|numeric|min:0',
+            'foto_producto' => 'file', // o 'required|image' si es un archivo
+            'categoria' => 'required|integer',
+        ]);
+
+        $product->nombreProducto= $r->input('nombre_producto');
+        $product->cantidadProducto= $r->input('cantidad_producto');
+        $product->precioProducto= $r->input('precio_producto');
+        $product->fotoProducto= $r->input('foto_producto');
+        $product->categoria= $r->input('categoria');
+        $product->save();
+        return redirect()->route('productos');
     }
 
     public function eliminar($id){
-        $category = CategoriaModel::findOrFail($id);
+        $category = ProductoModel::findOrFail($id);
         $category->delete();
-        return redirect()->route('categorias');
+        return redirect()->route('productos');
     }
-
-
-
     
 }

@@ -40,10 +40,10 @@
                 <td>{{$c->nombreProducto}}</td>
                 <td>{{$c->cantidadProducto}}</td>
                 <td>{{$c->precioProducto}}</td>
-                <td>{{$c->nombreCategoria}}</td>
+                <td>{{$c->categoria}}</td>
                 <td>
-                    <a class="btn btn-primary"> Editar </a>
-                    <a class="btn btn-danger"> Eliminar </a>
+                    <a class="btn btn-primary" href="{{route('form_edc_producto',$c->id)}}"> Editar </a>
+                    <a class="btn btn-danger" href="{{route('elimina_producto',$c->id)}}"> Eliminar </a>
                 </td>
 
             </tr>

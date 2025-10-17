@@ -2,7 +2,7 @@
 @yield('contenido')
 
 <div class="container">
-    <h1>Registro de Productos</h1>
+    <h1>Edición de Productos</h1>
 
     {{-- Mostrar errores generales --}}
     @if ($errors->any())
@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    <form action="{{ url('/productos/registro') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('actualiza_producto',$product->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         {{-- Nombre Producto --}}
         <div class="mb-3">
@@ -24,7 +24,7 @@
                    class="form-control @error('nombre_producto') is-invalid @enderror" 
                    id="nombre_producto" 
                    name="nombre_producto" 
-                   value="{{ old('nombre_producto') }}">
+                   value="{{$product->nombreProducto}}">
             @error('nombre_producto')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -37,7 +37,7 @@
                    class="form-control @error('cantidad_producto') is-invalid @enderror" 
                    id="cantidad_producto" 
                    name="cantidad_producto" 
-                   value="{{ old('cantidad_producto') }}">
+                   value="{{$product->cantidadProducto}}">
             @error('cantidad_producto')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -51,7 +51,7 @@
                    id="precio_producto" 
                    name="precio_producto" 
                    step="0.01"
-                   value="{{ old('precio_producto') }}">
+                   value="{{$product->precioProducto}}">
             @error('precio_producto')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -63,7 +63,7 @@
             <input type="file" 
                    class="form-control @error('foto_producto') is-invalid @enderror" 
                    id="foto_producto" 
-                   name="foto_producto">
+                   name="{{$product->fotoProducto}}">
             @error('foto_producto')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
